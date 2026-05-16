@@ -7,7 +7,7 @@ Run one command on a fresh OS, pick what you want from interactive checkbox menu
 ## Quick Start
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/YOUR_USERNAME/devtool-installer/main/install.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/Vishnu25112003/devtool-installer/main/install.sh)
 ```
 
 ## Supported Operating Systems

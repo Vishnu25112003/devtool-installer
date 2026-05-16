@@ -5,7 +5,7 @@
 # Version : 1.0.0
 # Supports: Arch family (Arch, Manjaro, EndeavourOS)
 #           Debian family (Ubuntu, Debian, Mint, Pop!_OS)
-# Usage   : bash <(curl -fsSL https://raw.githubusercontent.com/YOUR_USERNAME/devtool-installer/main/install.sh)
+# Usage   : bash <(curl -fsSL https://raw.githubusercontent.com/Vishnu25112003/devtool-installer/main/install.sh)
 # =============================================================================
 
 set -uo pipefail
