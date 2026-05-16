@@ -1,0 +1,18 @@
+# Logs
+*.log
+
+# Profiles (user-specific, keep samples in profiles/)
+*.profile
+!profiles/*.profile
+
+# Editor
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp
+*.tmp
+*.swp
