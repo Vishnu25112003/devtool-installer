@@ -65,12 +65,13 @@ run_test "Arch: --help exits 0" "devtool-installer-arch" \
 run_test "Ubuntu: --help exits 0" "devtool-installer-ubuntu" \
     "bash /home/testuser/install.sh --help"
 
-# Profile: minimal
+# Profile: minimal — write a real temp file inside the container (process substitution
+# fd paths like /dev/fd/63 only exist in the outer shell, not inside docker run -c)
 run_test "Arch: minimal profile dry-run" "devtool-installer-arch" \
-    "bash /home/testuser/install.sh --dry-run --profile <(printf 'git\ncurl\nwget\nneovim\ntmux\n')"
+    "printf 'git\ncurl\nwget\nneovim\ntmux\n' > /tmp/minimal.profile && bash /home/testuser/install.sh --dry-run --profile /tmp/minimal.profile"
 
 run_test "Ubuntu: minimal profile dry-run" "devtool-installer-ubuntu" \
-    "bash /home/testuser/install.sh --dry-run --profile <(printf 'git\ncurl\nwget\nneovim\ntmux\n')"
+    "printf 'git\ncurl\nwget\nneovim\ntmux\n' > /tmp/minimal.profile && bash /home/testuser/install.sh --dry-run --profile /tmp/minimal.profile"
 
 printf "\n"
 printf "Results: ${GREEN}${PASS} passed${NC}  ${RED}${FAIL} failed${NC}\n"

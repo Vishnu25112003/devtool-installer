@@ -1006,6 +1006,10 @@ run_install_engine() {
 
 # Install Node.js via NodeSource on Debian, pacman on Arch
 install_nodejs() {
+    if command -v node > /dev/null 2>&1; then
+        success "Node.js is already installed ($(node --version)) — skipping"
+        return 0
+    fi
     if [[ "${OS_FAMILY}" == "arch" ]]; then
         pkg_install_pacman "nodejs npm"
     else
@@ -1017,12 +1021,20 @@ install_nodejs() {
 
 # Install Rust via rustup (official installer)
 install_rustup() {
+    if command -v rustc > /dev/null 2>&1; then
+        success "Rust is already installed ($(rustc --version)) — skipping"
+        return 0
+    fi
     log "Installing Rust via rustup..."
     _run_cmd "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path"
 }
 
 # Install Docker via official Docker repository on Debian; pacman on Arch
 install_docker() {
+    if command -v docker > /dev/null 2>&1; then
+        success "Docker is already installed ($(docker --version 2>/dev/null | head -1)) — skipping"
+        return 0
+    fi
     if [[ "${OS_FAMILY}" == "arch" ]]; then
         pkg_install_pacman "docker docker-compose"
     else
@@ -1058,6 +1070,10 @@ install_zsh_omz() {
 
 # Install GitHub CLI via official apt repo on Debian; pacman on Arch
 install_gh() {
+    if command -v gh > /dev/null 2>&1; then
+        success "GitHub CLI is already installed ($(gh --version 2>/dev/null | head -1)) — skipping"
+        return 0
+    fi
     if [[ "${OS_FAMILY}" == "arch" ]]; then
         pkg_install_pacman "github-cli"
     else
@@ -1073,6 +1089,10 @@ install_gh() {
 
 # Install lazygit via pre-built binary on Debian; pacman on Arch
 install_lazygit() {
+    if command -v lazygit > /dev/null 2>&1; then
+        success "lazygit is already installed — skipping"
+        return 0
+    fi
     if [[ "${OS_FAMILY}" == "arch" ]]; then
         pkg_install_pacman "lazygit"
     else
@@ -1085,12 +1105,20 @@ install_lazygit() {
 
 # Install Starship prompt via official install script
 install_starship() {
+    if command -v starship > /dev/null 2>&1; then
+        success "Starship is already installed ($(starship --version 2>/dev/null | head -1)) — skipping"
+        return 0
+    fi
     log "Installing Starship prompt..."
     _run_cmd "curl -sS https://starship.rs/install.sh | sh -s -- --yes"
 }
 
 # Install Ollama via official install script
 install_ollama() {
+    if command -v ollama > /dev/null 2>&1; then
+        success "Ollama is already installed — skipping"
+        return 0
+    fi
     log "Installing Ollama..."
     _run_cmd "curl -fsSL https://ollama.com/install.sh | sh"
 }
@@ -1147,6 +1175,10 @@ install_codex_cli() {
 
 # Install VS Code via Microsoft apt repo on Debian; yay on Arch
 install_vscode() {
+    if command -v code > /dev/null 2>&1; then
+        success "VS Code is already installed — skipping"
+        return 0
+    fi
     if [[ "${OS_FAMILY}" == "arch" ]]; then
         pkg_install_yay "visual-studio-code-bin"
     else
@@ -1215,6 +1247,10 @@ install_discord() {
 
 # Install Brave via official apt repo on Debian; yay on Arch
 install_brave() {
+    if command -v brave-browser > /dev/null 2>&1 || command -v brave > /dev/null 2>&1; then
+        success "Brave is already installed — skipping"
+        return 0
+    fi
     if [[ "${OS_FAMILY}" == "arch" ]]; then
         pkg_install_yay "brave-bin"
     else
